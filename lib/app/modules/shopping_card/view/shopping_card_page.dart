@@ -149,8 +149,8 @@ class _ShoppingCardPageState extends State<ShoppingCardPage>
     return Center(
         child: Column(
       children: [
-        Icon(AntDesign.shoppingcart, size: 200),
-        Text('Seu carrinho está vazio')
+        //Icon(AntDesign.shoppingcart, size: 200),
+        Text('Talhões de Cultivo da Safra')
       ],
     ));
   }

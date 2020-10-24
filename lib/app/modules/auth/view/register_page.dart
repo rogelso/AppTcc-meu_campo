@@ -63,7 +63,7 @@ class _RegisterContentState extends State<RegisterContent>
       if (controller.registerSuccess) {
         showSuccess(
             message: 'Usuário Cadastrado com Sucesso', context: context);
-        Future.delayed(Duration(seconds: 2), () => Navigator.of(context).pop());
+        Future.delayed(Duration(seconds: 1), () => Navigator.of(context).pop());
       }
     });
   }
@@ -245,14 +245,14 @@ class _RegisterContentState extends State<RegisterContent>
                   SizedBox(
                     height: 10,
                   ),
-                  PizzaDeliveryButton(
-                    'Voltar',
-                    onPressed: () => Navigator.of(context).pop(),
-                    height: 50,
-                    labelSize: 18,
-                    labelColor: Colors.black,
-                    width: MediaQuery.of(context).size.width * .95,
-                  ),
+                  // PizzaDeliveryButton(
+                  //   'Voltar',
+                  //   onPressed: () => Navigator.of(context).pop(),
+                  //   height: 50,
+                  //   labelSize: 18,
+                  //   labelColor: Colors.black,
+                  //   width: MediaQuery.of(context).size.width * .95,
+                  // ),
                 ],
               ),
             ),

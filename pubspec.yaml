@@ -34,10 +34,17 @@ dependencies:
   dio: ^3.0.10
   curved_navigation_bar: ^0.3.4
   intl: ^0.16.1
+  awesome_dialog: ^1.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logoprincipal.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

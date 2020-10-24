@@ -20,6 +20,8 @@ class LoginController extends ChangeNotifier {
 
       sp.setString('user', user.toJson());
       sp.setString('token', user.token);
+      sp.setBool('unSelected', true);
+      //sp.setInt('id_safra', 1);
       print(user.token);
       print('token acima');
       showLoader = false;
