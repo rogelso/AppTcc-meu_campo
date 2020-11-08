@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meu_campo/app/models/order_model.dart';
 import 'package:meu_campo/app/modules/my_orders/controller/my_orders_controller.dart';
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
 import 'package:meu_campo/app/shared/mixins/messages_mixin.dart';
 
 import 'package:provider/provider.dart';
-import 'package:validators/validators.dart';
 
 class MyOrdersPage extends StatefulWidget {
   @override
@@ -114,9 +112,9 @@ class _MyOrdersPageState extends State<MyOrdersPage>
     );
   }
 
-  String _calculateTotalOrder(OrderModel order) {
-    final totalOrder = order.items.fold(
-        0.0, (totalValue, orderItem) => totalValue += orderItem.item.price);
-    return formatNumberPrice.format(totalOrder);
-  }
+  // String _calculateTotalOrder(OrderModel order) {
+  //   final totalOrder = order.items.fold(
+  //       0.0, (totalValue, orderItem) => totalValue += orderItem.item.price);
+  //   return formatNumberPrice.format(totalOrder);
+  // }
 }

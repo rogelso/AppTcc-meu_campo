@@ -3,8 +3,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:meu_campo/app/modules/auth/controllers/login_controller.dart';
 import 'package:meu_campo/app/modules/auth/view/register_page.dart';
 import 'package:meu_campo/app/modules/splash/view/splash_page.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_button.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_input.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_input.dart';
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
 import 'package:meu_campo/app/shared/mixins/messages_mixin.dart';
 
@@ -78,7 +78,7 @@ class _LoginContentState extends State<LoginContent>
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  PizzaDeliveryInput(
+                  MeuCampoInput(
                     'E-mail',
                     icon: Icon(Icons.alternate_email),
                     controller: emailEditingController,
@@ -93,7 +93,7 @@ class _LoginContentState extends State<LoginContent>
                   ValueListenableBuilder(
                     valueListenable: obscurePasswordValueNotifier,
                     builder: (_, obscurePasswordValueNotifierValue, child) {
-                      return PizzaDeliveryInput('Senha',
+                      return MeuCampoInput('Senha',
                           controller: passwordEditingController,
                           icon: Icon(Icons.security),
                           suffixIcon: Icon(FontAwesome.lock),
@@ -125,7 +125,7 @@ class _LoginContentState extends State<LoginContent>
                   SizedBox(
                     height: 20,
                   ),
-                  PizzaDeliveryButton(
+                  MeuCampoButton(
                     'Login',
                     onPressed: () {
                       if (formKey.currentState.validate()) {

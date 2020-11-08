@@ -1,45 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:meu_campo/app/models/safra_model.dart';
-import 'package:meu_campo/app/modules/dashboard/controller/dashboard_controller.dart';
-import 'package:meu_campo/app/modules/home/view/home_page.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_button.dart';
+import 'package:meu_campo/app/modules/safra/controller/safra_controller.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
 
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
 import 'package:meu_campo/app/shared/mixins/messages_mixin.dart';
-import 'package:provider/provider.dart';
 
-class SelectSafraDialog extends StatefulWidget {
-  List<SafraModel> safrass;
-  SelectSafraDialog(this.safrass);
-
+// ignore: must_be_immutable
+class NewSafraDialog extends StatefulWidget {
   //final safras = SafraController().getAllSafrasUser(); //esse chama
 
   @override
   _CustomDialogState createState() => _CustomDialogState();
 }
 
-class _CustomDialogState extends State<SelectSafraDialog>
+class _CustomDialogState extends State<NewSafraDialog>
     with LoaderMixin, MessagesMixin {
   String dropdownValue = 'One';
-  int _value = 1;
-  List<ListItem> _dropdownItems = [];
+
+  List<ListItem> _dropdownItems = [
+    ListItem(1, "Safra 2019/2020"),
+    ListItem(2, "Safrinha 2020"),
+    ListItem(3, "Safra 2020/2021"),
+    ListItem(4, "Safrinha 2021"),
+  ];
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
   ListItem _selectedItem;
 
   void initState() {
     super.initState();
-    print('init state safras dialog');
-    print(widget.safrass.length);
-
-    widget.safrass.forEach((element) => print(element.anoSafra));
-    widget.safrass.forEach((element) =>
-        _dropdownItems.add(ListItem(element.id, element.anoSafra)));
-    //_dropdownItems.add(ListItem(4, "teste"));
-
     _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
     _selectedItem = _dropdownMenuItems[0].value;
+
+    // final safraController = context.read<SafraController>();
+    // safraController.addListener(() {
+    //   showHideLoaderHelper(context, safraController.showLoader);
+
+    //   if (!isNull(safraController.error)) {
+    //     showError(message: safraController.error, context: context);
+    //   }
+
+    //   if (safraController.loginSuccess) {
+    //     Navigator.of(context)
+    //         .pushNamedAndRemoveUntil(HomePage.router, (route) => false);
+    //   }
+    // });
   }
 
   List<DropdownMenuItem<ListItem>> buildDropDownMenuItems(List listItems) {
@@ -76,14 +82,15 @@ class _CustomDialogState extends State<SelectSafraDialog>
           Container(
             height: 30,
             child: Text(
-              "Selecione uma de suas Safras",
+              "Nova Safra",
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.w700,
               ),
             ),
           ),
           Divider(),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -104,26 +111,57 @@ class _CustomDialogState extends State<SelectSafraDialog>
               ),
             ),
           ),
+
           //Text("You select ${_selectedItem.value}"),
-          SizedBox(height: 18.0),
+          SizedBox(height: 5.0),
           Divider(),
+          SizedBox(height: 15.0),
           //Align(
           // alignment: Alignment.bottomCenter,
           // child: Icon(Icons.cancel),
           // ),
-          PizzaDeliveryButton(
-            'Selecionar',
-            onPressed: () {
-              DashboardController().setSelectSafra(
-                  context, _selectedItem.value, _selectedItem.name);
-            },
-            height: 28,
-            labelColor: Colors.white,
-            buttonColor: Colors.green[900],
-            width: MediaQuery.of(context).size.width * .3,
-            labelSize: 14,
+          Container(
+            alignment: Alignment.topCenter,
+            margin: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: MeuCampoButton(
+                    'Cancelar',
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    height: 28,
+                    labelColor: Colors.white,
+                    buttonColor: Colors.blueGrey,
+                    width: MediaQuery.of(context).size.width * .2,
+                    labelSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: MeuCampoButton(
+                    'Cadastrar',
+                    onPressed: () {
+                      SafraController()
+                          .createNewSafra(context, _selectedItem.name);
+                      //Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      //return CircularProgressIndicator();
+                    },
+                    height: 28,
+                    labelColor: Colors.white,
+                    buttonColor: Colors.green[900],
+                    width: MediaQuery.of(context).size.width * .2,
+                    labelSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
         ],
       ),
     );
@@ -131,10 +169,7 @@ class _CustomDialogState extends State<SelectSafraDialog>
 
   @override
   Widget build(BuildContext context) {
-    //final controller = Provider.of<SafraController>(context);
-    //print(controller.safras.length);
-    print('build select safra dialog');
-    //print(safras);
+    print('build new safra dialog');
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -150,6 +185,5 @@ class _CustomDialogState extends State<SelectSafraDialog>
 class ListItem {
   int value;
   String name;
-
   ListItem(this.value, this.name);
 }

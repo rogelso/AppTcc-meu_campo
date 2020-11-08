@@ -1,14 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:meu_campo/app/models/safra_model.dart';
 import 'package:meu_campo/app/models/user_model.dart';
 import 'package:meu_campo/app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:meu_campo/app/modules/dashboard/view/dashboard_page.dart';
-import 'package:meu_campo/app/modules/dashboard/view/select_safra_dialog.dart';
+import 'package:meu_campo/app/modules/safra/view/select_safra_2_dialog.dart';
 import 'package:meu_campo/app/modules/home/controllers/home_controller.dart';
 import 'package:meu_campo/app/modules/my_orders/controller/my_orders_controller.dart';
 import 'package:meu_campo/app/modules/my_orders/view/my_orders_page.dart';
+import 'package:meu_campo/app/modules/safra/view/new_safra_dialog.dart';
 import 'package:meu_campo/app/modules/shopping_card/controller/shopping_card_controller.dart';
 import 'package:meu_campo/app/modules/shopping_card/view/shopping_card_page.dart';
 import 'package:meu_campo/app/modules/splash/view/splash_page.dart';
@@ -37,11 +37,11 @@ class _HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   HomeController controller;
   final _tabSelected = ValueNotifier<int>(0);
-  final _titles = ['Finanças', 'Safra', 'Talhões em Cultivo', 'Cargas'];
   UserModel _userData;
   String dropdownValue = 'One';
-
-  List<SafraModel> safrass = [];
+  String nome = null;
+  String sobrenome = null;
+  String email = null;
 
   @override
   void initState() {
@@ -49,9 +49,11 @@ class _HomeContentState extends State<HomeContent>
     controller = context.read<HomeController>();
     context.read<HomeController>().getUser();
     controller.tabController = TabController(vsync: this, length: 4);
-
-    var controller2 = context.read<HomeController>();
     context.read<HomeController>().getSafras();
+
+    nome = controller.user.nome.toString();
+    sobrenome = controller.user.sobrenome.toString();
+    email = controller.user.email.toString();
 
     controller.addListener(() {
       print('QQQQQQQQQQQQQQQQQQQQQQQQ');
@@ -59,33 +61,21 @@ class _HomeContentState extends State<HomeContent>
       print(controller.safraSelected);
       //print(controller.);
 
-      _userData = controller.user;
       //userData = controller.user;
       //print(controller.user.toList());
       //controller.user.forEach((element) => print(element.nome));
-      print(_userData.nome);
+      //print(_userData.nome);
 
       //safraSelected = controller.safraSelected;
       //print('safra selected');
       //print(safraSelected);
-
-      safrass = controller.safras;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: ValueListenableBuilder(
-      //     valueListenable: _tabSelected,
-      //     builder: (_, _tabSelectedValue, child) {
-      //       return Text(_titles[_tabSelectedValue]);
-      //     },
-      //   ),
-      // ),
       appBar: AppBar(
-        //title: Text(safraSelected.toString()),
         title:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Consumer<HomeController>(builder: (_, controller, __) {
@@ -96,40 +86,31 @@ class _HomeContentState extends State<HomeContent>
             iconSize: 27,
             tooltip: 'Show Snackbar',
             onPressed: () {
-              // context.read<DashboardController>().checkSelectedSafra();
-              // Consumer<DashboardController>(builder: (_, controller, __) {
-              //   showDialog(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         // return SelectSafraDialog();
-              //         //return SelectSafraDialog(controller.safras);
-              //         //return Text(controller.user.cidade);
-              //         print('select safra');
-              //       });
-              // });
-              //var safrass = controller.getSafras();
-
+              print('abriu select choose safra');
               print('safrass home page select');
-              print(safrass.length);
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    print(controller.safras);
-                    return SelectSafraDialog(controller.safras);
-                    //return Text(controller.user.cidade); //esse da certo
-                  });
-
-              print('abrir select');
+              print(controller.safras.length);
+              if (controller.safras.length != 0) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      //print(controller.safras);
+                      //print(controller.teste);
+                      return SelectSafra2Dialog(controller.safras);
+                      //return Text(controller.user.cidade); //esse da certo
+                    });
+              }
             },
           ),
         ]),
       ),
       drawer: Drawer(
+          //Consumer<HomeController>(builder: (_, controller, __) {}),
           child: ListView(children: <Widget>[
-        //Consumer<HomeController>(builder: (_, controller, __) {}),
-        new UserAccountsDrawerHeader(
-          accountName: new Text('_userData.nome'),
-          accountEmail: new Text('teste@teste.com'),
+        UserAccountsDrawerHeader(
+          accountName: Text(nome.toString() + ' ' + sobrenome.toString()),
+          accountEmail: Text(email.toString()),
+          //accountName: Text('controller.user.nome'),
+          //accountEmail: Text('email.toString()'),
           currentAccountPicture: new CircleAvatar(
             backgroundImage: AssetImage(
               'assets/images/user.png',
@@ -137,6 +118,10 @@ class _HomeContentState extends State<HomeContent>
           ),
         ),
         new ListTile(
+          leading: Icon(
+            FontAwesome.map_o,
+            color: Colors.green[900],
+          ),
           title: new Text('Meus Talhões'),
           onTap: () {
             Navigator.of(context).pop();
@@ -147,9 +132,28 @@ class _HomeContentState extends State<HomeContent>
           height: 5.0,
         ),
         new ListTile(
+          // leading: Material(
+          //   color: Colors.green[900],
+          //   shape: CircleBorder(side: BorderSide(color: Colors.white)),
+          //   child: Icon(
+          //     Icons.add_circle,
+          //     color: Colors.white,
+          //   ),
+          // ),
+          leading: Icon(
+            FontAwesome.plus_circle,
+            color: Colors.lightGreen[900],
+          ),
           title: new Text('Nova Safra'),
           onTap: () {
-            Navigator.of(context).pop();
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  //print(controller.safras);
+                  //print(controller.teste);
+                  return NewSafraDialog();
+                  //return Text(controller.user.cidade); //esse da certo
+                });
           },
         ),
         new Divider(
@@ -157,6 +161,10 @@ class _HomeContentState extends State<HomeContent>
           height: 5.0,
         ),
         new ListTile(
+          leading: Icon(
+            Icons.shopping_cart,
+            color: Colors.blue[900],
+          ),
           title: new Text('Estoque de Produtos'),
           onTap: () {
             Navigator.of(context).pop();
@@ -167,9 +175,23 @@ class _HomeContentState extends State<HomeContent>
           height: 5.0,
         ),
         new ListTile(
+          leading: Icon(
+            Icons.new_releases,
+            color: Colors.yellow[900],
+          ),
           title: new Text('Notícias e Cotações'),
           onTap: () {
             Navigator.of(context).pop();
+          },
+        ),
+        new Divider(
+          color: Colors.black,
+          height: 5.0,
+        ),
+        new ListTile(
+          title: new Text('Sair'),
+          onTap: () async {
+            showAlertDialogExit(context);
           },
         )
       ])),
@@ -223,6 +245,41 @@ class _HomeContentState extends State<HomeContent>
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialogExit(BuildContext context) {
+    // configura o button
+    Widget okButton = FlatButton(
+      child: Text("SAIR"),
+      onPressed: () async {
+        final sp = await SharedPreferences.getInstance();
+        sp.clear();
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(SplashPage.router, (route) => false);
+      },
+    );
+    Widget cancelaButton = FlatButton(
+      child: Text("Cancelar"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    // configura o  AlertDialog
+    AlertDialog alerta = AlertDialog(
+      title: Text("SAIR"),
+      content: Text("Deseja sair da Conta?"),
+      actions: [
+        cancelaButton,
+        okButton,
+      ],
+    );
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerta;
+      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PizzaDeliveryButton extends Container {
-  PizzaDeliveryButton(
+class MeuCampoButton extends Container {
+  MeuCampoButton(
     String label, {
     @required double width,
     @required double height,

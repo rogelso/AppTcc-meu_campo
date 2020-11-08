@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PizzaDeliveryInput extends TextFormField {
-  PizzaDeliveryInput(label,
+class MeuCampoInput extends TextFormField {
+  MeuCampoInput(label,
       {Icon icon,
       TextEditingController controller,
       TextInputType keyboardType,

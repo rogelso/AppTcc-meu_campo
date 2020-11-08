@@ -18,6 +18,9 @@ class AuthRepository {
       if (e?.response?.statusCode == 403) {
         message = 'Usuário ou senha inválidos';
       }
+      if (e?.response?.statusCode == 400) {
+        message = 'Falha na conexão com o servidor';
+      }
       throw RestException(message);
     }
   }

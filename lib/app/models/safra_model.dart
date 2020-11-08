@@ -29,4 +29,25 @@ class SafraModel {
     data['manutencoes_maq'] = this.manutencoesMaq;
     return data;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'id_user': idUser,
+      'ano_safra': anoSafra,
+      'custos_fixos_totais': custosFixosTotais,
+      'manutencoes_maq': manutencoesMaq
+    };
+  }
+
+  factory SafraModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return SafraModel(
+        id: map['id'] ?? 0,
+        idUser: map['id_user'] ?? '',
+        anoSafra: map['ano_safra'] ?? '',
+        custosFixosTotais: map['custos_fixos_totais'] ?? '',
+        manutencoesMaq: map['manutencoes_maq'] ?? '');
+  }
 }

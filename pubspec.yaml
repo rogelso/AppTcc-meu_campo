@@ -35,6 +35,9 @@ dependencies:
   curved_navigation_bar: ^0.3.4
   intl: ^0.16.1
   awesome_dialog: ^1.2.0
+  font_awesome_flutter: ^8.8.1
+  fluttertoast: ^7.1.1
+
 
 dev_dependencies:
   flutter_test:

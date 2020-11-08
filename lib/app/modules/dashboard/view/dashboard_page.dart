@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:meu_campo/app/models/safra_model.dart';
 
 import 'package:meu_campo/app/modules/dashboard/controller/dashboard_controller.dart';
-import 'package:meu_campo/app/modules/dashboard/view/select_safra_dialog.dart';
+import 'package:meu_campo/app/modules/safra/view/select_safra_dialog.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -15,8 +15,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final formatNumberPrice =
       NumberFormat.currency(name: 'R\$', locale: 'pt_BR', decimalDigits: 2);
-
-  Color _textColor = Colors.green;
 
   String teste;
   List<SafraModel> safrass = [];
@@ -284,10 +282,7 @@ showAlertDialog3(BuildContext context) {
   );
   Widget cancelaButton = FlatButton(
     child: Text("Cancelar"),
-    onPressed: () {
-      Navigator.of(context).pop;
-      print('demonho');
-    },
+    onPressed: () {},
   );
   Widget dispararButton = FlatButton(
     child: Text("Disparar"),

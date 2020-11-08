@@ -4,7 +4,6 @@ import 'package:meu_campo/app/models/dashboard_model.dart';
 import 'package:meu_campo/app/models/safra_model.dart';
 import 'package:meu_campo/app/models/user_model.dart';
 import 'package:meu_campo/app/modules/home/view/home_page.dart';
-import 'package:meu_campo/app/modules/safra/controller/safra_controller.dart';
 import 'package:meu_campo/app/repositories/dashboard_repository.dart';
 import 'package:meu_campo/app/repositories/safra_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';

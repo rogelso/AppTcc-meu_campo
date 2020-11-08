@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:meu_campo/app/modules/home/controllers/home_controller.dart';
 import 'package:meu_campo/app/modules/shopping_card/components/shopping_card_item.dart';
 import 'package:meu_campo/app/modules/shopping_card/controller/shopping_card_controller.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_button.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
 import 'package:meu_campo/app/shared/mixins/messages_mixin.dart';
 
@@ -90,7 +89,7 @@ class _ShoppingCardPageState extends State<ShoppingCardPage>
                     ),
                     Divider(),
                     Expanded(child: Container()),
-                    PizzaDeliveryButton(
+                    MeuCampoButton(
                       'Finalizar Pedido',
                       width: MediaQuery.of(context).size.width * .9,
                       height: 50,
@@ -193,6 +192,7 @@ class _ShoppingCardPageState extends State<ShoppingCardPage>
               height: 150,
               child: ValueListenableBuilder(
                 valueListenable: paymentTypeSelected,
+                // ignore: missing_return
                 builder: (_, paymentTypeSelectedValue, child) {
                   // return RadioButtonGroup(
                   //   picked: paymentTypeSelectedValue,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:meu_campo/app/modules/auth/controllers/register_controller.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_button.dart';
-import 'package:meu_campo/app/shared/components/pizza_delivery_input.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
+import 'package:meu_campo/app/shared/components/meu_campo_input.dart';
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
 import 'package:meu_campo/app/shared/mixins/messages_mixin.dart';
 
@@ -63,7 +63,7 @@ class _RegisterContentState extends State<RegisterContent>
       if (controller.registerSuccess) {
         showSuccess(
             message: 'Usuário Cadastrado com Sucesso', context: context);
-        Future.delayed(Duration(seconds: 1), () => Navigator.of(context).pop());
+        Future.delayed(Duration(seconds: 2), () => Navigator.of(context).pop());
       }
     });
   }
@@ -92,7 +92,7 @@ class _RegisterContentState extends State<RegisterContent>
                   SizedBox(
                     height: 20,
                   ),
-                  PizzaDeliveryInput(
+                  MeuCampoInput(
                     'Nome',
                     controller: nameEditingController,
                     icon: Icon(FontAwesome.user),
@@ -106,7 +106,7 @@ class _RegisterContentState extends State<RegisterContent>
                   SizedBox(
                     height: 20,
                   ),
-                  PizzaDeliveryInput(
+                  MeuCampoInput(
                     'Sobrenome',
                     controller: sobrenomeEditingController,
                     icon: Icon(FontAwesome.user),
@@ -120,7 +120,7 @@ class _RegisterContentState extends State<RegisterContent>
                   SizedBox(
                     height: 20,
                   ),
-                  PizzaDeliveryInput(
+                  MeuCampoInput(
                     'E-mail',
                     controller: emailEditingController,
                     icon: Icon(Icons.alternate_email),
@@ -136,7 +136,7 @@ class _RegisterContentState extends State<RegisterContent>
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: PizzaDeliveryInput(
+                        child: MeuCampoInput(
                           'Cidade',
                           controller: cidadeEditingController,
                           icon: Icon(Icons.location_city),
@@ -152,7 +152,7 @@ class _RegisterContentState extends State<RegisterContent>
                         width: 30,
                       ),
                       Expanded(
-                        child: PizzaDeliveryInput(
+                        child: MeuCampoInput(
                           'UF',
                           controller: ufEditingController,
                           //icon: Icon(Icons.c),
@@ -173,7 +173,7 @@ class _RegisterContentState extends State<RegisterContent>
                   ValueListenableBuilder(
                     valueListenable: obscureTextPassword,
                     builder: (_, obscureTextPasswordValue, child) {
-                      return PizzaDeliveryInput(
+                      return MeuCampoInput(
                         'Senha',
                         controller: passwordEditingController,
                         icon: Icon(Icons.security),
@@ -198,7 +198,7 @@ class _RegisterContentState extends State<RegisterContent>
                   ValueListenableBuilder(
                     valueListenable: obscureTextConfirmPassword,
                     builder: (_, obscureTextConfirmPasswordValue, child) {
-                      return PizzaDeliveryInput(
+                      return MeuCampoInput(
                         'Confirmar Senha',
                         controller: confirmPasswordEditingController,
                         icon: Icon(Icons.security),
@@ -223,7 +223,7 @@ class _RegisterContentState extends State<RegisterContent>
                   SizedBox(
                     height: 20,
                   ),
-                  PizzaDeliveryButton(
+                  MeuCampoButton(
                     'CRIAR CONTA',
                     onPressed: () {
                       if (formKey.currentState.validate()) {
