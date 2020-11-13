@@ -32,7 +32,7 @@ class AuthRepository {
         'sobrenome': registerInputModel.sobrenome,
         'email': registerInputModel.email,
         'password': registerInputModel.password,
-        'cidade': registerInputModel.email,
+        'cidade': registerInputModel.cidade,
         'uf': registerInputModel.uf
       });
     } on DioError catch (e) {

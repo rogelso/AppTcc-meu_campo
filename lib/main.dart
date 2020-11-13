@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Meu Campo',
       theme: ThemeData(primaryColor: Colors.green, primarySwatch: Colors.green),
       initialRoute: SplashPage.router,
       routes: {

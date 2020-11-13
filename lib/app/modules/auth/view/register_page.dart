@@ -100,6 +100,9 @@ class _RegisterContentState extends State<RegisterContent>
                       if (value == null || value.toString().isEmpty) {
                         return 'Nome obrigatório';
                       }
+                      if (!isLength(value.toString(), 4)) {
+                        return '4 Caracteres mínimos';
+                      }
                       return null;
                     },
                   ),
@@ -113,6 +116,9 @@ class _RegisterContentState extends State<RegisterContent>
                     validator: (value) {
                       if (value == null || value.toString().isEmpty) {
                         return 'Sobrenome obrigatório';
+                      }
+                      if (!isLength(value.toString(), 4)) {
+                        return '4 Caracteres mínimos';
                       }
                       return null;
                     },
@@ -144,6 +150,9 @@ class _RegisterContentState extends State<RegisterContent>
                             if (value == null || value.toString().isEmpty) {
                               return 'Cidade obrigatória';
                             }
+                            if (!isLength(value.toString(), 5)) {
+                              return '5 Caracteres mínimos';
+                            }
                             return null;
                           },
                         ),
@@ -159,6 +168,9 @@ class _RegisterContentState extends State<RegisterContent>
                           validator: (value) {
                             if (value == null || value.toString().isEmpty) {
                               return 'UF obrigatório';
+                            }
+                            if (!isLength(value.toString(), 2)) {
+                              return '2 Caracteres mínimos';
                             }
                             return null;
                           },
@@ -183,8 +195,8 @@ class _RegisterContentState extends State<RegisterContent>
                           obscureTextPassword.value = !obscureTextPasswordValue;
                         },
                         validator: (value) {
-                          if (!isLength(value.toString(), 6)) {
-                            return 'Senha precisa ter pelo menos 6 caracteres';
+                          if (!isLength(value.toString(), 8)) {
+                            return 'Senha deve conter 8 caracteres mínimos';
                           }
 
                           return null;
@@ -210,10 +222,10 @@ class _RegisterContentState extends State<RegisterContent>
                         },
                         validator: (value) {
                           if (value.toString().isEmpty) {
-                            return 'Confirma senha obrigatória';
+                            return 'Campo Obrigatório';
                           } else if (passwordEditingController.text !=
                               value.toString()) {
-                            return 'Senha e Confirma senha não conferem';
+                            return 'Senha e Confirma Senha não conferem';
                           }
                           return null;
                         },

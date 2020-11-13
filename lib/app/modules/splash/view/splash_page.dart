@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:meu_campo/app/modules/auth/view/login_page.dart';
 import 'package:meu_campo/app/modules/home/view/home_page.dart';
@@ -28,6 +30,15 @@ class _SplashContentState extends State<SplashContent> {
   @override
   void initState() {
     super.initState();
+    startSplashScreenTimer();
+  }
+
+  startSplashScreenTimer() async {
+    var _duration = new Duration(seconds: 2);
+    return new Timer(_duration, navigationToNextPage);
+  }
+
+  void navigationToNextPage() {
     var controller = context.read<SplashController>();
     controller.addListener(() {
       switch (controller.logged) {
@@ -46,10 +57,18 @@ class _SplashContentState extends State<SplashContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
-      body: Container(),
-    );
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 1,
+            height: MediaQuery.of(context).size.width * 1,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/logoprincipal.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ));
   }
 }

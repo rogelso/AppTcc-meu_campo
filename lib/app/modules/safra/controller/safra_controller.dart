@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meu_campo/app/exceptions/rest_exception.dart';
 import 'package:meu_campo/app/models/safra_model.dart';
 import 'package:meu_campo/app/models/user_model.dart';

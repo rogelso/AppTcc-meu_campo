@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:meu_campo/app/exceptions/rest_exception.dart';
 import 'package:meu_campo/app/models/safra_model.dart';
 import 'package:meu_campo/app/utils/custom_dio.dart';
-import 'package:meu_campo/app/view_models/create_safra_model.dart';
 
 class SafraRepository {
   var dio = CustomDio.whithAuthentication().instance;

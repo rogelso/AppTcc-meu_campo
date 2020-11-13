@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:meu_campo/app/modules/auth/controllers/login_controller.dart';
 import 'package:meu_campo/app/modules/auth/view/register_page.dart';
+import 'package:meu_campo/app/modules/home/view/home_page.dart';
 import 'package:meu_campo/app/modules/splash/view/splash_page.dart';
 import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
 import 'package:meu_campo/app/shared/components/meu_campo_input.dart';
@@ -56,7 +57,7 @@ class _LoginContentState extends State<LoginContent>
 
       if (loginController.loginSuccess) {
         Navigator.of(context)
-            .pushNamedAndRemoveUntil(SplashPage.router, (route) => false);
+            .pushNamedAndRemoveUntil(HomePage.router, (route) => false);
       }
     });
   }
@@ -71,7 +72,6 @@ class _LoginContentState extends State<LoginContent>
           width: 250,
         ),
         Container(
-          //color: Colors.white,
           child: Form(
             key: formKey,
             child: Padding(
@@ -103,23 +103,11 @@ class _LoginContentState extends State<LoginContent>
                           },
                           obscureText: obscurePasswordValueNotifierValue,
                           validator: (value) {
-                            if (!isLength(value.toString(), 6)) {
-                              return 'Senha deve conter no mínimo 6 caracteres';
+                            if (!isLength(value.toString(), 8)) {
+                              return 'Senha deve conter no mínimo 8 caracteres';
                             }
                             return null;
                           });
-                      // return _buildTextFieldPassword(
-                      //   controller: passwordEditingController,
-                      //   labelText: 'Senha',
-                      //   suffixIcon: IconButton(
-                      //     onPressed: () => obscurePassword.value =
-                      //         !obscurePasswordValueNotifierValue,
-                      //     icon: Icon(obscurePasswordValueNotifierValue
-                      //         ? Icons.lock
-                      //         : Icons.lock_open),
-                      //   ),
-                      //   obscureText: obscurePasswordValueNotifierValue,
-                      // );
                     },
                   ),
                   SizedBox(
@@ -141,16 +129,6 @@ class _LoginContentState extends State<LoginContent>
                     width: MediaQuery.of(context).size.width * .92,
                     labelSize: 18,
                   ),
-                  //SizedBox(
-                  //  height: 50,
-                  //),
-                  // FlatButton(
-                  //   onPressed: () {
-                  //     Navigator.of(context).pushNamed(RegisterPage.router);
-                  //   },
-                  //   child: Text('Cadastre-se',
-                  //       style: TextStyle(fontSize: 20, fontFamily: 'Arial')),
-                  // )
                 ],
               ),
             ),

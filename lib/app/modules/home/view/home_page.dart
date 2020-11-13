@@ -1,17 +1,16 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:meu_campo/app/models/user_model.dart';
+import 'package:meu_campo/app/modules/auth/view/login_page.dart';
+import 'package:meu_campo/app/modules/cargas/view/cargas_page.dart';
 import 'package:meu_campo/app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:meu_campo/app/modules/dashboard/view/dashboard_page.dart';
+import 'package:meu_campo/app/modules/safra/view/safra_page.dart';
 import 'package:meu_campo/app/modules/safra/view/select_safra_2_dialog.dart';
 import 'package:meu_campo/app/modules/home/controllers/home_controller.dart';
-import 'package:meu_campo/app/modules/my_orders/controller/my_orders_controller.dart';
-import 'package:meu_campo/app/modules/my_orders/view/my_orders_page.dart';
 import 'package:meu_campo/app/modules/safra/view/new_safra_dialog.dart';
-import 'package:meu_campo/app/modules/shopping_card/controller/shopping_card_controller.dart';
-import 'package:meu_campo/app/modules/shopping_card/view/shopping_card_page.dart';
 import 'package:meu_campo/app/modules/splash/view/splash_page.dart';
+import 'package:meu_campo/app/modules/talhoes_safra/view/talhoes_safra_page.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,10 +36,12 @@ class _HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   HomeController controller;
   final _tabSelected = ValueNotifier<int>(0);
-  UserModel _userData;
   String dropdownValue = 'One';
+  // ignore: avoid_init_to_null
   String nome = null;
+  // ignore: avoid_init_to_null
   String sobrenome = null;
+  // ignore: avoid_init_to_null
   String email = null;
 
   @override
@@ -92,6 +93,7 @@ class _HomeContentState extends State<HomeContent>
               if (controller.safras.length != 0) {
                 showDialog(
                     context: context,
+                    barrierDismissible: false,
                     builder: (BuildContext context) {
                       //print(controller.safras);
                       //print(controller.teste);
@@ -221,26 +223,18 @@ class _HomeContentState extends State<HomeContent>
             ChangeNotifierProvider(
               create: (_) => DashboardController()..findControleFinanceiro(),
             ),
-            ChangeNotifierProvider(create: (_) => MyOrdersController()),
-            ChangeNotifierProvider(
-              create: (_) => ShoppingCardController(),
-            ),
+            //ChangeNotifierProvider(create: (_) => MyOrdersController()),  //ficou safra page
+            //ChangeNotifierProvider(
+            //  create: (_) => ShoppingCardController(), //fioou talhoes safra page
+            //),
           ],
           child: TabBarView(
             controller: controller.tabController,
             children: [
               DashboardPage(),
-              MyOrdersPage(),
-              ShoppingCardPage(),
-              FlatButton(
-                onPressed: () async {
-                  final sp = await SharedPreferences.getInstance();
-                  sp.clear();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      SplashPage.router, (route) => false);
-                },
-                child: Text('Sair', style: TextStyle(fontSize: 20)),
-              )
+              SafraPage(),
+              TalhoesSafraPage(),
+              CargasPage()
             ],
           ),
         ),
@@ -256,7 +250,7 @@ class _HomeContentState extends State<HomeContent>
         final sp = await SharedPreferences.getInstance();
         sp.clear();
         Navigator.of(context)
-            .pushNamedAndRemoveUntil(SplashPage.router, (route) => false);
+            .pushNamedAndRemoveUntil(LoginPage.router, (route) => false);
       },
     );
     Widget cancelaButton = FlatButton(

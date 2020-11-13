@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:meu_campo/app/modules/home/view/home_page.dart';
 import 'package:meu_campo/app/modules/safra/controller/safra_controller.dart';
 import 'package:meu_campo/app/shared/components/meu_campo_button.dart';
 import 'package:meu_campo/app/shared/mixins/loader_mixin.dart';
