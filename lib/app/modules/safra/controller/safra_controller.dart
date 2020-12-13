@@ -57,13 +57,10 @@ class SafraController extends ChangeNotifier {
     try {
       final sp = await SharedPreferences.getInstance();
       final user = UserModel.fromJson(sp.getString('user'));
-      print('passou antes controller');
 
       newSafra = await _safraRepository.storeSafra(user.id, safra);
 
-      print('passou depois controller');
       if (newSafra[0] != null) {
-        print('================');
         sp.remove('unSelected');
         sp.setInt('id_safra', newSafra[0].id);
         sp.setString('safra', newSafra[0].anoSafra);
@@ -75,14 +72,14 @@ class SafraController extends ChangeNotifier {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(HomePage.router, (route) => false);
       } else {
-        print('nao criou a safra');
+        error = 'Erro ao criar a safra';
       }
     } on RestException catch (e) {
       error = e.message;
       showLoader = false;
       print('erro');
     } catch (e) {
-      error = 'Erro ao autenticar usuário';
+      error = 'Erro ao criar a safra';
       showLoader = false;
     } finally {
       notifyListeners();

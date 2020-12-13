@@ -32,20 +32,6 @@ class _CustomDialogState extends State<NewSafraDialog>
     super.initState();
     _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
     _selectedItem = _dropdownMenuItems[0].value;
-
-    // final safraController = context.read<SafraController>();
-    // safraController.addListener(() {
-    //   showHideLoaderHelper(context, safraController.showLoader);
-
-    //   if (!isNull(safraController.error)) {
-    //     showError(message: safraController.error, context: context);
-    //   }
-
-    //   if (safraController.loginSuccess) {
-    //     Navigator.of(context)
-    //         .pushNamedAndRemoveUntil(HomePage.router, (route) => false);
-    //   }
-    // });
   }
 
   List<DropdownMenuItem<ListItem>> buildDropDownMenuItems(List listItems) {
@@ -90,7 +76,6 @@ class _CustomDialogState extends State<NewSafraDialog>
             ),
           ),
           Divider(),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -111,15 +96,9 @@ class _CustomDialogState extends State<NewSafraDialog>
               ),
             ),
           ),
-
-          //Text("You select ${_selectedItem.value}"),
           SizedBox(height: 5.0),
           Divider(),
           SizedBox(height: 15.0),
-          //Align(
-          // alignment: Alignment.bottomCenter,
-          // child: Icon(Icons.cancel),
-          // ),
           Container(
             alignment: Alignment.topCenter,
             margin: const EdgeInsets.only(left: 15, right: 15),

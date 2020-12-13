@@ -63,7 +63,8 @@ class _RegisterContentState extends State<RegisterContent>
       if (controller.registerSuccess) {
         showSuccess(
             message: 'Usuário Cadastrado com Sucesso', context: context);
-        Future.delayed(Duration(seconds: 2), () => Navigator.of(context).pop());
+        //FocusScope.of(context).requestFocus(new FocusNode());
+        Future.delayed(Duration(seconds: 4), () => Navigator.of(context).pop());
       }
     });
   }

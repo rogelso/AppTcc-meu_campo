@@ -44,6 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
               print('chamou o dialog');
               showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context) {
                     return SelectSafraDialog(safrass);
                     //return SelectSafraDialog();
@@ -51,10 +52,6 @@ class _DashboardPageState extends State<DashboardPage> {
             }
           });
 
-          // showAlertDialog1(context);
-          // show diagon estava aqui fora trazia dados ao mudar
-          // Navigator.of(context)
-          //     .pushNamedAndRemoveUntil(RegisterPage.router, (route) => false);
           break;
         case SafraSelect.selected:
           print("pegou o selecionado");
@@ -94,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 itemBuilder: (context, index) {
                   final demonstrations = controller.demonstration[index];
                   return ExpansionTile(
-                    title: Text('Visualizar Demontrações Financeiras'),
+                    title: Text('Visualizar Demonstrações Financeiras'),
                     leading: Icon(
                       FontAwesome.line_chart,
                       size: 36.0,
@@ -254,7 +251,6 @@ showAlertDialog1(BuildContext context) {
     child: Text("OK"),
     onPressed: () {
       Navigator.pop(context);
-      print('demonho');
     },
   );
   // configura o  AlertDialog

@@ -5,6 +5,7 @@ import 'package:meu_campo/app/modules/auth/view/login_page.dart';
 import 'package:meu_campo/app/modules/cargas/view/cargas_page.dart';
 import 'package:meu_campo/app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:meu_campo/app/modules/dashboard/view/dashboard_page.dart';
+import 'package:meu_campo/app/modules/noticias/view/noticias_page.dart';
 import 'package:meu_campo/app/modules/safra/view/safra_page.dart';
 import 'package:meu_campo/app/modules/safra/view/select_safra_2_dialog.dart';
 import 'package:meu_campo/app/modules/home/controllers/home_controller.dart';
@@ -106,13 +107,10 @@ class _HomeContentState extends State<HomeContent>
         ]),
       ),
       drawer: Drawer(
-          //Consumer<HomeController>(builder: (_, controller, __) {}),
           child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
           accountName: Text(nome.toString() + ' ' + sobrenome.toString()),
           accountEmail: Text(email.toString()),
-          //accountName: Text('controller.user.nome'),
-          //accountEmail: Text('email.toString()'),
           currentAccountPicture: new CircleAvatar(
             backgroundImage: AssetImage(
               'assets/images/user.png',
@@ -150,6 +148,7 @@ class _HomeContentState extends State<HomeContent>
           onTap: () {
             showDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (BuildContext context) {
                   //print(controller.safras);
                   //print(controller.teste);
@@ -183,7 +182,7 @@ class _HomeContentState extends State<HomeContent>
           ),
           title: new Text('Notícias e Cotações'),
           onTap: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(NoticiasPage.router);
           },
         ),
         new Divider(
@@ -227,6 +226,19 @@ class _HomeContentState extends State<HomeContent>
             //ChangeNotifierProvider(
             //  create: (_) => ShoppingCardController(), //fioou talhoes safra page
             //),
+            //p
+            // ChangeNotifierProvider(
+            //   create: (_) => DashboardController()..findControleFinanceiro(),
+            // ),
+            // ChangeNotifierProvider(
+            //   create: (_) => SafraController(),
+            // ),
+            // ChangeNotifierProvider(
+            //   create: (_) => TalhaoSafraController(),
+            // ),
+            // ChangeNotifierProvider(
+            //   create: (_) => CargasController(),
+            // ),
           ],
           child: TabBarView(
             controller: controller.tabController,

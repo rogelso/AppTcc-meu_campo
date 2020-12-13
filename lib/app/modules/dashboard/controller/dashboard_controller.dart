@@ -38,7 +38,6 @@ class DashboardController extends ChangeNotifier {
       errorLoadData = e.message;
     } catch (e) {
       print(e);
-      // error = 'Erro ao Buscar As Demontrações Financeiras';
     } finally {
       loading = false;
       notifyListeners();
